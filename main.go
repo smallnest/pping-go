@@ -9,22 +9,23 @@ import (
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
 	"github.com/google/gopacket/pcap"
+	"github.com/spf13/pflag"
 )
 
 var (
-	liveInp   = flag.String("i", "", "interface name")
-	fname     = flag.String("r", "", "pcap captured file")
-	filterOpt = flag.String("f", "", "pcap filter applied to packets")
+	liveInp   = pflag.StringP("interface", "i", "", "interface name")
+	fname     = pflag.StringP("read", "r", "", "pcap captured file")
+	filterOpt = pflag.StringP("filter", "f", "", "pcap filter applied to packets")
 )
 
 func main() {
-	flag.DurationVar(&sumInt, "q", 10*time.Second, "interval to print summary reports to stderr")
-	flag.BoolVar(&filtLocal, "l", false, "show RTTs through local host applications")
-	flag.DurationVar(&timeToRun, "s", 0*time.Second, "stop after capturing for <num> seconds")
-	flag.BoolVar(&machineReadable, "m", false, "machine readable output")
-	flag.DurationVar(&tsvalMaxAge, "M", 10*time.Second, "max age of an unmatched tsval")
-	flag.DurationVar(&flowMaxIdle, "F", 300*time.Second, "flows idle longer than <num> are deleted")
-	flag.IntVar(&maxPackets, "c", 0, "stop after capturing <num> packets")
+	pflag.DurationVarP(&sumInt, "sumInt", "q", 10*time.Second, "interval to print summary reports to stderr")
+	pflag.BoolVarP(&filtLocal, "showLocal", "l", false, "show RTTs through local host applications")
+	pflag.DurationVarP(&timeToRun, "seconds", "s", 0*time.Second, "stop after capturing for <num> seconds")
+	pflag.IntVarP(&maxPackets, "count", "c", 0, "stop after capturing <num> packets")
+	pflag.BoolVarP(&machineReadable, "machine", "m", false, "machine readable output")
+	pflag.DurationVarP(&tsvalMaxAge, "tsvalMaxAge", "M", 10*time.Second, "max age of an unmatched tsval")
+	pflag.DurationVarP(&flowMaxIdle, "flowMaxIdle", "F", 300*time.Second, "flows idle longer than <num> are deleted")
 
 	flag.Parse()
 
