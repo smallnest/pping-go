@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"time"
@@ -27,7 +26,7 @@ func main() {
 	pflag.DurationVarP(&tsvalMaxAge, "tsvalMaxAge", "M", 10*time.Second, "max age of an unmatched tsval")
 	pflag.DurationVarP(&flowMaxIdle, "flowMaxIdle", "F", 300*time.Second, "flows idle longer than <num> are deleted")
 
-	flag.Parse()
+	pflag.Parse()
 
 	if *filterOpt != "" {
 		filter += " and (" + *filterOpt + ")"
