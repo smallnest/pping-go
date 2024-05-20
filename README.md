@@ -14,8 +14,6 @@
 go install github.com/smallnest/pping-go@latest
 ```
 
-yi
-
 ## TCP 时间戳选项
 
 pping需要监控的TCP包含时间戳选项，你可以在服务器开启时间戳选项：
